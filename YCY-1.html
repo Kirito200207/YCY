@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余橙煜行长粉丝后援会</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #FF0000; /* 红色背景 */
+            text-align: center;
+            color: #FFFF00; /* 黄色字体 */
+            padding: 50px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px #000;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #FFFF00; /* 黄色边框 */
+            margin: 20px auto;
+            background: url('./YCY.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: #FFFF00; /* 黄色按钮 */
+            color: #FF0000; /* 红色字体 */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #FFD700; /* 按钮悬停效果 */
+        }
+        .section {
+            background: rgba(255, 255, 0, 0.1); /* 半透明黄色背景 */
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 15px;
+            max-width: 800px;
+            border: 2px solid #FFFF00; /* 黄色边框 */
+        }
+        .certificate {
+            display: none;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 0, 0.1); /* 半透明黄色背景 */
+            color: #FFFF00; /* 黄色字体 */
+            width: 80%;
+            max-width: 600px;
+            border: 5px solid #FFFF00; /* 黄色边框 */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .certificate h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .certificate p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .signature {
+            font-family: cursive;
+            font-size: 1.5rem;
+            color: #FFFF00; /* 黄色字体 */
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FF0000; /* 红色背景 */
+            padding: 20px;
+            border: 5px solid #FFFF00; /* 黄色边框 */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #FFFF00; /* 黄色字体 */
+        }
+        .quote {
+            font-style: italic;
+            color: #FFFF00; /* 黄色字体 */
+            margin: 20px 0;
+        }
+        .falling-money {
+            position: absolute;
+            top: -50px;
+            animation: fall 5s linear infinite;
+            color: #FFFF00; /* 黄色字体 */
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="avatar"></div>
+    <h1>热烈庆祝余橙煜当选中国建设银行行长！</h1>
+    <button onclick="showCertificate()">领取粉丝证书</button>
+    <button onclick="showExchange()">橙子币兑换</button>
+    <button onclick="showQuote()">行长语录</button>
+
+    <div id="certificate" class="certificate">
+        <h2>余橙煜行长全球粉丝后援会荣誉证书</h2>
+        <p>兹证明 <span id="userName">[用户名字]</span> 为余橙煜行长全球粉丝后援会正式成员，享有以下特权：</p>
+        <ul>
+            <li>每月免费领取1吨橙子；</li>
+            <li>行长亲自为您数钱（限时1分钟）；</li>
+            <li>优先体验“橙子币”金融系统。</li>
+        </ul>
+        <p class="signature" onclick="showPopup()">—— 余橙煜行长</p>
+    </div>
+
+    <div id="exchange" class="section hidden">
+        <h2>橙子币兑换系统</h2>
+        <p>请输入金额（人民币）：</p>
+        <input type="number" id="amount" placeholder="例如：100">
+        <button onclick="convertToOrangeCoin()">兑换</button>
+        <p id="result"></p>
+    </div>
+
+    <div id="quoteSection" class="section hidden">
+        <h2>行长语录</h2>
+        <p class="quote" id="quoteText">点击按钮获取行长最新语录！</p>
+    </div>
+
+    <div id="popup" class="popup hidden">
+        <img src="https://via.placeholder.com/200x200/FFFF00/FF0000?text=Q版余橙煜" alt="余橙煜行长">
+        <p>您的存款已自动兑换为橙子，请查收！</p>
+    </div>
+
+    <!-- 钞票飘落效果 -->
+    <div class="falling-money">💸</div>
+    <div class="falling-money" style="left: 20%; animation-delay: 1s;">💸</div>
+    <div class="falling-money" style="left: 40%; animation-delay: 2s;">💸</div>
+    <div class="falling-money" style="left: 60%; animation-delay: 3s;">💸</div>
+    <div class="falling-money" style="left: 80%; animation-delay: 4s;">💸</div>
+
+    <script>
+        function showCertificate() {
+            const userName = prompt("请输入您的名字：");
+            if (userName) {
+                document.getElementById("userName").textContent = userName;
+                document.getElementById("certificate").style.display = "block";
+            }
+        }
+
+        function showExchange() {
+            document.getElementById("exchange").classList.remove("hidden");
+        }
+
+        function convertToOrangeCoin() {
+            const amount = document.getElementById("amount").value;
+            if (amount) {
+                const orangeCoins = amount * 10; // 1元 = 10橙子币
+                document.getElementById("result").textContent = `兑换成功！您获得了 ${orangeCoins} 橙子币！`;
+            }
+        }
+
+        function showQuote() {
+            const quotes = [
+                "橙子科技，金融新未来！",
+                "银行的钱是大家的，橙子是我的！",
+                "信橙神，得永生！",
+                "今天你存钱了吗？存钱送橙子！",
+                "橙子币，未来金融的新方向！",
+                "存钱送橙子，财富稳增长！",
+                "科技橙，金融新动力！"
+            ];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById("quoteText").textContent = randomQuote;
+            document.getElementById("quoteSection").classList.remove("hidden");
+        }
+
+        function showPopup() {
+            document.getElementById("popup").classList.remove("hidden");
+            setTimeout(() => {
+                document.getElementById("popup").classList.add("hidden");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
